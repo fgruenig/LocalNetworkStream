@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Translation Stream</title>
+</head>
+
+<body>
+  <h1>Stream the Translation Audio</h1>
+  <button id="btStream" onclick="buttonStream()">Start Streaming</button>
+  <button id="btDisconnect" onclick="buttonDisconnect()" disabled>Stop Streaming</button>
+  <p></p>
+  <label for="microphones">Choose a microphone:</label>
+  <select name="microphones" id="microphones" disabled>>
+  </select>
+  <p></p>
+  <label for="gainInput">Gain:</label>
+  <input type="number" id="gainInput" name="gainInput" value="1" defaultValue="1" step="0.1" max="20" min="0" onchange="changeGain()">
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="adapter-latest.js"></script>
+  <script src="common.js"></script>
+  <script src="streamer.js"></script>
+</body>
+
+</html>

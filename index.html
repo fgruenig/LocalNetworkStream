@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Translation Stream</title>  
+</head>
+
+<body>
+  <h1>Translation Stream</h1>
+  <p>Enable the Translationstream below</p>
+  <input type="checkbox" id="strToggle" name="strToggle" onclick='streamToggle(this)'>
+  <label for="strToggle">streaming</label><br>
+  <br>
+  <label for="output">Choose a device:</label>
+  <select name="output" id="output">>
+  </select>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="adapter-latest.js"></script>
+  <script src="common.js"></script>
+  <script src="listener.js"></script>
+</body>
+
+</html>
