@@ -1,12 +1,13 @@
 {
   "name": "LocalNetworkStream",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Stream/broadcast audio over WebRTC in a local network",
   "dependencies": {
     "express": ">=4.18.1",
     "socket.io": ">=4.5.2",
     "path": ">=0.0.0",
-    "http": ">=0.0.0"
+    "http": ">=0.0.0",
+    "fs": ">=0.0.0"
   },
   "scripts": {
     "start": "node index.js"
@@ -18,7 +19,7 @@
   "keywords": [],
   "author": "Frank Grünig, fgruenig@gmail.com",
   "license": "MIT",
-  "homepage": "https://github.com/fgruenig/LocalNetworkStream"
+  "homepage": "https://github.com/fgruenig/LocalNetworkStream",
   "devDependencies": {
     "eslint": "^8.24.0",
     "eslint-config-standard": "^17.0.0",
