@@ -1,15 +1,28 @@
-const app = require('express')()
+const fs = require('fs')
+// const http = require('http')
+const https = require('https')
 const path = require('path')
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
-const port = process.env.PORT || 3000
+const express = require('express')
+
+const privateKey = fs.readFileSync('key.pem', 'utf8')
+const certificate = fs.readFileSync('cert.pem', 'utf8')
+const credentials = { key: privateKey, cert: certificate }
+
+const app = express(https)
+const httpsServer = https.createServer(credentials, app)
+
+const io = require('socket.io')(httpsServer)
 
 let streamerId = null
+
+// const httpServer = http.createServer(app)
+
+app.use(express.static(__dirname))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
 })
-app.get('/stream.html', (req, res) => {
+/* app.get('/stream.html', (req, res) => {
   res.sendFile(path.join(__dirname, '/stream.html'))
 })
 app.get('/index2.html', (req, res) => {
@@ -29,7 +42,7 @@ app.get('/common.js', (req, res) => {
 })
 app.get('/silence.mp3', (req, res) => {
   res.sendFile(path.join(__dirname, '/silence.mp3'))
-})
+}) */
 
 io.on('connection', (socket) => {
   socket.on('streamerRegistration', () => {
@@ -82,6 +95,5 @@ io.on('connection', (socket) => {
   })
 })
 
-http.listen(port, () => {
-  console.log(`Socket.IO server running at http://localhost:${port}/`)
-})
+// httpServer.listen(8080)
+httpsServer.listen(8443)
