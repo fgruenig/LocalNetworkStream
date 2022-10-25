@@ -29,4 +29,4 @@ It will just be supported by all devices, since all mainstream browsers incorpor
 ## Quickinstall
 
 To get started with this project clone this repository then run `npm install` in the folder of the local copy to install all required Node.js modules.
-After that you can run `node index.js`
+After that you can run `node index.js`. Connect a streaming device under [https://<IP-OF-SMALL-SERVER>/stream.html]. Then the clients can get connected under [https://<IP-OF-SMALL-SERVER>/]
