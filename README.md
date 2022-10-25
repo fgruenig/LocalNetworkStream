@@ -16,15 +16,15 @@ It will just be supported by all devices, since all mainstream browsers incorpor
 ## Requirements
 
 1. Hardware
-  * A small server (for example a Raspberry Pi)
-  * Router that lets the users Connect to the streaming device and points to the DNS server running on the small server
-  * A device with a microphone (any smartphone or the small server)
+    * A small server (for example a Raspberry Pi)
+    * Router that lets the users Connect to the streaming device and points to the DNS server running on the small server
+    * A device with a microphone (any smartphone or the small server)
 
 2. Software
-  * [Node.js](https://nodejs.org/ "Node.js Homepage") running on the small server 
-  * DNS server that points the following connectivity check links to the small server
-    * [http://connectivitycheck.gstatic.com/generate_204](http://connectivitycheck.gstatic.com/generate_204)
-    * [https://www.apple.com/library/test/success.html](https://www.apple.com/library/test/success.html)
+    * [Node.js](https://nodejs.org/ "Node.js Homepage") running on the small server 
+    * DNS server that points the following connectivity check links to the small server
+      * [http://connectivitycheck.gstatic.com/generate_204](http://connectivitycheck.gstatic.com/generate_204)
+      * [https://www.apple.com/library/test/success.html](https://www.apple.com/library/test/success.html)
 
 ## Quickinstall
 
