@@ -1,8 +1,6 @@
 const socket = io()
 
 const cb = document.getElementById('strToggle')
-const audioOutputSelect = document.getElementById('output')
-audioOutputSelect.addEventListener('change', changeOutput)
 const audioElem = document.createElement('audio')
 
 let pc = null
@@ -127,10 +125,6 @@ async function connect () {
   console.log('Init sent!', pc.remoteId, pc.myId)
 }
 
-function changeOutput () {
-  console.log('function change output ran!')
-}
-
 function asyncEmit (eventName, data) {
   return new Promise(function (resolve, reject) {
     socket.emit(eventName, data)
@@ -154,7 +148,6 @@ async function streamToggle (cb) {
   if (cb.checked === true) {
     console.log('Stream toggled ON!')
     await connect()
-    getConnectedDevices('audiooutput', audioOutputSelect, selectMem)
   } else {
     console.log('Stream toggled OFF!')
     socket.emit('message', { type: 'disconnect' }, pc.remoteId, pc.myId)
