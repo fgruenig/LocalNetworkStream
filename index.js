@@ -1,5 +1,5 @@
 const fs = require('fs')
-// const http = require('http')
+const http = require('http')
 const https = require('https')
 const path = require('path')
 const express = require('express')
@@ -11,38 +11,26 @@ const credentials = { key: privateKey, cert: certificate }
 const app = express(https)
 const httpsServer = https.createServer(credentials, app)
 
+const appAnsw = express(http)
+const httpServer = http.createServer(appAnsw)
+
 const io = require('socket.io')(httpsServer)
 
 let streamerId = null
-
-// const httpServer = http.createServer(app)
 
 app.use(express.static(__dirname))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
 })
-/* app.get('/stream.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/stream.html'))
+
+app.get('/library/test/success.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'success.html'))
 })
-app.get('/index2.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index2.html'))
+
+appAnsw.get('/generate_204', (req, res) => {
+  res.status(204)
 })
-app.get('/adapter-latest.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '/adapter-latest.js'))
-})
-app.get('/listener.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '/listener.js'))
-})
-app.get('/streamer.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '/streamer.js'))
-})
-app.get('/common.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '/common.js'))
-})
-app.get('/silence.mp3', (req, res) => {
-  res.sendFile(path.join(__dirname, '/silence.mp3'))
-}) */
 
 io.on('connection', (socket) => {
   socket.on('streamerRegistration', () => {
@@ -97,3 +85,4 @@ io.on('connection', (socket) => {
 
 // httpServer.listen(8080)
 httpsServer.listen(8443)
+httpServer.listen(80)
