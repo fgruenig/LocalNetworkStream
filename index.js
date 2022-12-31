@@ -30,6 +30,11 @@ app.get('/library/test/success.html', (req, res) => {
 
 appAnsw.get('/generate_204', (req, res) => {
   res.status(204)
+  res.end
+})
+
+appAnsw.get('/test.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'success.html'))
 })
 
 io.on('connection', (socket) => {
@@ -84,5 +89,5 @@ io.on('connection', (socket) => {
 })
 
 // httpServer.listen(8080)
-httpsServer.listen(8443)
+httpsServer.listen(443)
 httpServer.listen(80)
