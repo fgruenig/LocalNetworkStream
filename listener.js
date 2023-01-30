@@ -1,7 +1,8 @@
 const socket = io()
 
 const cb = document.getElementById('strToggle')
-const audioElem = document.createElement('audio')
+const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+audioContext.suspend()
 
 let pc = null
 let selectMem = ''
@@ -101,9 +102,16 @@ async function connect () {
   })
 
   pc.addEventListener('track', event => {
-    console.log('AudioTrack received by listener:', event)
-    audioElem.srcObject = event.streams[0]
-    audioElem.play()
+    // console.log('AudioTrack received by listener:', event)
+    let a = new Audio();
+    a.muted = true;
+    a.srcObject = event.streams[0];
+    a.addEventListener('canplaythrough', () => {
+      a = null;
+    });
+    // The lines above are a Workaround for a Chrome Bug
+    let source = audioContext.createMediaStreamSource(event.streams[0])
+    source.connect(audioContext.destination)
   })
 
   try {
@@ -148,6 +156,7 @@ async function streamToggle (cb) {
   if (cb.checked === true) {
     console.log('Stream toggled ON!')
     await connect()
+    audioContext.resume()
   } else {
     console.log('Stream toggled OFF!')
     socket.emit('message', { type: 'disconnect' }, pc.remoteId, pc.myId)
